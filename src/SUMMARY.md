@@ -10,3 +10,6 @@
     - [Identifiers](./006_LexicalStructure/002_identifiers.md)
     - [Comments](./006_LexicalStructure/003_comments.md)
     - [Literals](./006_LexicalStructure/004_literals.md)
+- [Primative types](./007_primative_types.md)
+- [Compound types](./008_compound_types.md)
+- [Attributes](./009_attributes.md)
