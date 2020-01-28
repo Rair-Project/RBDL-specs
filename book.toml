@@ -10,6 +10,8 @@ create-missing = false
 
 [output.html]
 mathjax-support = true
+theme="Rust"
+default-theme="Rust"
 
 [output.html.playpen]
 editable = true
