@@ -7,7 +7,7 @@ Except when being part of string literal, a single line comments start with
 
 Example
 
-```
+```rust,ignore
     // This is single line comment
     Color : struct {
         // This is another single line comment
@@ -26,7 +26,7 @@ Multi line comments **MUST NOT** be nested.
 
 Example
 
-```
+```rust,ignore
     /* This is
        a multi line
        comment
