@@ -1,3 +1,0 @@
-# Primative Types
-
-TODO
