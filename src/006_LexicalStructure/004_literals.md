@@ -11,12 +11,12 @@ RBDL supports several types of literals:
 
 ### Boolean Literals
 
-Bolean literals **MUST** be either the keyword `true` or the keyword `false`.
+Boolean literals **MUST** be either the keyword `true` or the keyword `false`.
 
 ### Byte-Character Literals
 
 A *byte-character* literal **MUST** be a single ASCII character enclosed
-in single quotes preceaded by character `b` as in `b'x'`. *Byte-Character*
+in single quotes preceded by character `b` as in `b'x'`. *Byte-Character*
 literals **MUST** follow [byte escaping](#byte-escaping) rules and
 [quote escaping](#quote-escaping) rules when needed.
 
@@ -25,7 +25,7 @@ literals **MUST** follow [byte escaping](#byte-escaping) rules and
 ### Byte-String Literals
 
 A *byte-string* literal **MUST** be one or more ASCII characters enclosed in
-double quotes preceaded by character as in `"xyz"`. *Byte-String* literals
+double-quotes preceded by character as in `"xyz"`. *Byte-String* literals
 **MUST** follow [byte escaping](#byte-escaping) rules and
 [quote escaping](#quote-escaping) rules when needed.
 
@@ -45,15 +45,15 @@ rules and [quote escaping](#quote-escaping) rules when needed.
 A *floating-point* literal has one of two forms:
 
 - One or more *decimal-digits* followed by a period character `.`
-  optionally followed by one or more *decimal-digits* optionally
-  followed by an exponent.
+ optionally followed by one or more *decimal-digits* optionally
+ followed by an exponent.
 
 - One or more *decimal-digits* followed by an exponent.
 
 Where exponent is either the character `e` or `E` followed by
 one or more *decimal-digits*.
 
-Character `_` **MAY** be used as visual separator between digits and they
+Character `_` **MAY** be used as a visual separator between digits, and they
 **MUST** be ignored by *rbdlc*.
 
 Example:
@@ -67,12 +67,12 @@ An integer literal has one of several forms:
 - `0b0`
 - `0o0`
 - `0x0`
-- A non zero *decimal-digit* followed by arbitary sequence of *decimal-digits*.
-- `0x` followed by a non zero *hex-digit* followed by arbitrary sequence of *decimal-digits*.
-- `0o` followed by non zero *octal-digit* followed by arbitrary sequence of *octal-digits*.
-- `0b` followed by non zero *binary-digit* followed by arbitrary sequence of *binary-digits*.
+- A non zero *decimal-digit* followed by an arbitrary sequence of *decimal-digits*.
+- `0x` followed by a non zero *hex-digit* followed by an arbitrary sequence of *decimal-digits*.
+- `0o` followed by non zero *octal-digit* followed by an arbitrary sequence of *octal-digits*.
+- `0b` followed by non zero *binary-digit* followed by an arbitrary sequence of *binary-digits*.
 
-Character `_` **MAY** be used as visual separator between digits and they
+Character `_` **MAY** be used as a visual separator between digits, and they
 **MUST** be ignored by *rbdlc*.
 
 ### String Literals
@@ -94,38 +94,38 @@ type.
 
 ### ASCII Escaping
 
-| ASCII Escape sequence         | Name             |
+| ASCII Escape sequence | Name |
 |-------------------------------|------------------|
-|`\n`                           | New line         |
-|`\r`                           | Carriage return  |
-|`\t`                           | Tab              |
-|`\\`                           | Single backslash |
-|`\0`                           | Null byte        |
+|`\n` | New line |
+|`\r` | Carriage return |
+|`\t` | Tab |
+|`\\` | Single backslash |
+|`\0` | Null byte |
 |`\x` followed by 2 *hex-digits*| Hex byte <= 0x7F |
 
 
 ### Byte Escaping
 
-| Byte Escape Sequence          | Name               |
+| Byte Escape Sequence | Name |
 |-------------------------------|--------------------|
-|`\n`                           | New line           |
-|`\r`                           | Carriage return    |
-|`\t`                           | Tab                |
-|`\\`                           | Single backslash   |
-|`\0`                           | Null byte          |
+|`\n` | New line |
+|`\r` | Carriage return |
+|`\t` | Tab |
+|`\\` | Single backslash |
+|`\0` | Null byte |
 |`\x` followed by 2 *hex-digits*| Arbitrary hex byte |
 
 
 ### Quote Escaping
 
-| Quote Escape sequence  | Name         |
+| Quote Escape sequence | Name |
 |------------------------|--------------|
-| `\'`                   | Single Quote |
-| `\"`                   | Double Quote |
+| `\'` | Single Quote |
+| `\"` | Double Quote |
 
 ### Unicode Escaping
 
 
-| Unicode Escape sequence         | Name                   |
+| Unicode Escape sequence | Name |
 |---------------------------------|------------------------|
 | `\u` followed by 6 *hex-digits* | Unicode character code |

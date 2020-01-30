@@ -2,7 +2,7 @@
 
 This specification document covers:
 
-- The syntax constrains or RBDL document.
+- The syntax constraints or RBDL document.
 - The semantic rules for transpiling RBDL documents.
 - The API exposed by transpiled documents for all target languages.
 

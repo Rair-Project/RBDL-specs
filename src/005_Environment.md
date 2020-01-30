@@ -4,7 +4,7 @@ The text that describes binary file format is called *RBDL document*.
 
 ## Document Structure
 
-The text of RBDL document **MUST** be kept in single file prior to transpiling. The result of transpiling is **REQUIRED** to be *well-formed code*. Transpiled *code* **MAY** depend on arbitrary 3rd party run time library. However, it **MUST** be possible to convert the transpiled *code*  (together with any needed 3rd party runtime) into stand alone library.
+The text of RBDL document **MUST** be kept in a single file prior to transpiling. The result of transpiling is **REQUIRED** to be *well-formed code*. Transpiled *code* **MAY** depend on arbitrary 3rd party run time library. However, it **MUST** be possible to convert the transpiled *code* (together with any needed 3rd party runtime) into a stand-alone library.
 
 
 ## Diagnostics

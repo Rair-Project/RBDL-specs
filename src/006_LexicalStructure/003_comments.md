@@ -1,9 +1,9 @@
 ## Comments
 
-### Single Line Comments
+### Single-Line Comments
 
-Except when being part of string literal, a single line comments start with
-`//` sequence and follwed by any UTF-8 character and terminated by new line.
+Except when being part of string literal, single-line comments start with
+`//` sequence and followed by any UTF-8 character and terminated by a new line.
 
 Example
 
@@ -22,7 +22,7 @@ Example
 Except when being part of string literal, a multiline comment starts with
 `\*` sequence and terminated by `*/` sequence. Multiline comments **MAY**
 contain any valid UTF-8 characters except the terminating sequence `*/`.
-Multi line comments **MUST NOT** be nested.
+Multiline comments **MUST NOT** be nested.
 
 Example
 

@@ -1,8 +1,8 @@
-# Primative Types
+# Primitive Types
 
-RBDL has various primative types, all of which **MUST** be supported by
-*rbdlc*. These types represent fundemental building blocks that can be
-lated user to construct compound types in rbdl document.
+RBDL has various primitive types, all of which **MUST** be supported by
+*rbdlc*. These types represent fundamental building blocks that can be
+later used to construct compound types in rbdl document.
 
 
 ## Types representing Integers
@@ -62,9 +62,9 @@ unSigned 128-bits integer \\(i\\) where \\( 0 \le i \lt
 340282366920938463463374607431768211456 \\).
 
 
-## Types representing floating point numbers.
+## Types representing floating-point numbers.
 
-Floating point representation is based on IEEE 754. All types in this category support the following attributes:
+Floating-point representation is based on IEEE 754. All types in this category support the following attributes:
 
 - `alignment`
 - `discard`
@@ -95,7 +95,7 @@ Characters selected from alphabet encoded via attribute
 - `static`
 
 
-## Array Based types
+## Array-Based types
 
 All types in this category support the following attributes:
 
@@ -133,17 +133,16 @@ and 32.
 ### `oct`
 
 one or more unsigned *octal-digit* encoded via attribute
-`encoding`.  Each `oct` type **MUST** have `encoding` and `count`
+`encoding`. Each `oct` type **MUST** have `encoding` and `count`
 attribute. The value of `count` attribute **MUST** be between 0
 and 42.
 
 ### `String`
 
 Zero or more [`char`](#char) encoded via attribute `encoding`.
-Each `String` **MUST** have `encoding` attribute. Also, each `string` must have at least either `delimiter` attribute or `count` attribute. A `string` type may have both `delimiter` and `count`, in that case a string is terminated whenever `delimiter` is met or `count` is reached whichever comes first.
+Each `String` **MUST** have `encoding` attribute. Also, each `string` must have at least either `delimiter` attribute or `count` attribute. A `string` type may have both `delimiter` and `count`, in that case, a string is terminated whenever `delimiter` is met or `count` is reached whichever comes first.
 
 ### vec<T>
 
 `TODO`
-Zero or more occurences of `T`
-
+Zero or more occurrences of `T`

@@ -1,6 +1,6 @@
 ## Identifiers
 
-Idenfier is an arbitrarily long sequence of characters. The first character **MUST** be chosen from the `Alpha Group`. The remaining characters in an identifier **MUST** be chosen from `Alpha Group` or `Num Group`. An Identifier **MUST NOT** be a [keyword](./001_keywords.html)
+An Identifier is an arbitrarily long sequence of characters. The first character **MUST** be chosen from the `Alpha Group`. The remaining characters in an identifier **MUST** be chosen from `Alpha Group` or `Num Group`. An Identifier **MUST NOT** be a [keyword](./001_keywords.html)
 
 ```
 Alpha Group:
