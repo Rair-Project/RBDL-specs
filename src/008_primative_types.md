@@ -140,9 +140,15 @@ and 42.
 ### `String`
 
 Zero or more [`char`](#char) encoded via attribute `encoding`.
-Each `String` **MUST** have `encoding` attribute. Also, each `string` must have at least either `delimiter` attribute or `count` attribute. A `string` type may have both `delimiter` and `count`, in that case, a string is terminated whenever `delimiter` is met or `count` is reached whichever comes first.
+Each `String` **MUST** have `encoding` attribute. Also, each `String`
+**MUST** have at least either `delimiter` attribute or `count` attribute. A
+`String` type may have both `delimiter` and `count`, in that case, a
+`String`  is terminated whenever `delimiter` is met or `count` is reached
+whichever comes first.
 
-### vec<T>
+### `vec<T>`
 
-`TODO`
-Zero or more occurrences of `T`
+An array holding zero or more elements of type `T`. Each `vec<T>` **MUST**
+have at least either `delimiter` attribute or `count` attribute. A `Vec<T>`
+type may have both `delimiter` and `count`, in that case, a `Vec<T>` is terminated whenever `delimiter` is met or `count` is reached whichever
+comes first.
