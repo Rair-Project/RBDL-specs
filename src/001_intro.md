@@ -5,7 +5,7 @@ RBDL is declarative Domain Specific Language designed to formally describe binar
 RBDL does not depend on any language. However, RBDL files are intended to be later transpiled into another language that implements the mechanism required for parsing the file format in question.
 
 WARNING: This product target languages known to the State of California to cause cancer
-and birth defects or other reproductive harm.
+and birth defects or other reproductive harm (pun intended).
 
 ### Credits
 
