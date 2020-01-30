@@ -6,7 +6,7 @@ The key words **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**,
 as described in [RFC 2119](https://tools.ietf.org/html/rfc2119).
 
 For the purpose of this document, the following terms, key words,
-and symbols shall be styled in *italic*.
+and symbols are styled in *italic*.
 
 ### binary-digit
 A character selected from the alphabet:
