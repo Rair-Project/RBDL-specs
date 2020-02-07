@@ -12,5 +12,7 @@
     - [Literals](./006_LexicalStructure/004_literals.md)
 - [Basic concepts](./007_basic_concepts.md)
 - [Primative types](./008_primative_types.md)
-- [Compound types](./009_compound_types.md)
+- [Compound types](./009_compound_types/readme.md)
+    - [struct](./009_compound_types/001_struct.md)
+    - [enum](./009_compound_types/002_enum.md)
 - [Attributes](./010_attributes.md)
