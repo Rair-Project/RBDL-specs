@@ -44,6 +44,7 @@ V2 :struct {
     #[static="SIG", encoding="ASCII", count=3]
     magic: String,
     d1: u8,
+    #[encoding="ASCII"]
     d2: char,
     #[static="2", encoding="ASCII"]
     version: char,
