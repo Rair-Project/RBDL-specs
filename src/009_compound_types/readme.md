@@ -14,7 +14,7 @@ CompoundTypeName: Category {
 }
 ```
 
-A *well-formed document* may have Compound types without attributes [the line `#[attr_1, /* More attributes as needed */ attr_n]`) are completely optional].
+A *well-formed document* may have Compound types without attributes (the line `#[attr_1, /* More attributes as needed */ attr_n]` is completely optional).
 
 Category **MUST** be either the keyword `enum` or `struct`. Compound type name **MUST** be a unique identifier amongst all other compound types and primitive types.
 
