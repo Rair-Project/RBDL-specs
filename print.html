@@ -1,0 +1,849 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>RBDL Specifications Draft</title>
+        
+        <meta name="robots" content="noindex" />
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "rust" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="001_intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="002_motivation.html"><strong aria-hidden="true">2.</strong> Motivation</a></li><li class="chapter-item expanded "><a href="003_Scope.html"><strong aria-hidden="true">3.</strong> Scope</a></li><li class="chapter-item expanded "><a href="004_Terms.html"><strong aria-hidden="true">4.</strong> Terms, definitions, and symbols</a></li><li class="chapter-item expanded "><a href="005_Environment.html"><strong aria-hidden="true">5.</strong> Environment</a></li><li class="chapter-item expanded "><a href="006_LexicalStructure/index.html"><strong aria-hidden="true">6.</strong> Lexical Structure</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="006_LexicalStructure/001_keywords.html"><strong aria-hidden="true">6.1.</strong> Keywords</a></li><li class="chapter-item expanded "><a href="006_LexicalStructure/002_identifiers.html"><strong aria-hidden="true">6.2.</strong> Identifiers</a></li><li class="chapter-item expanded "><a href="006_LexicalStructure/003_comments.html"><strong aria-hidden="true">6.3.</strong> Comments</a></li><li class="chapter-item expanded "><a href="006_LexicalStructure/004_literals.html"><strong aria-hidden="true">6.4.</strong> Literals</a></li></ol></li><li class="chapter-item expanded "><a href="007_basic_concepts.html"><strong aria-hidden="true">7.</strong> Basic concepts</a></li><li class="chapter-item expanded "><a href="008_primitive_types.html"><strong aria-hidden="true">8.</strong> Primitive types</a></li><li class="chapter-item expanded "><a href="009_compound_types/index.html"><strong aria-hidden="true">9.</strong> Compound types</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="009_compound_types/001_struct.html"><strong aria-hidden="true">9.1.</strong> struct</a></li><li class="chapter-item expanded "><a href="009_compound_types/002_enum.html"><strong aria-hidden="true">9.2.</strong> enum</a></li></ol></li><li class="chapter-item expanded "><a href="010_attributes/index.html"><strong aria-hidden="true">10.</strong> Attributes</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="010_attributes/001_a_to_z.html"><strong aria-hidden="true">10.1.</strong> A to Z</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">RBDL Specifications Draft</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#introduction" id="introduction">Introduction</a></h1>
+<p>RBDL is declarative Domain Specific Language designed to formally describe binary file formats. Its main objective is to decouple the parsing of executable files (as well as any file-based binary structure) from the remaining process of reverse engineering. RBDL is capable of handling binary file formats with variable header size and optional components. RBDL supports recovering gracefully while parsing partially corrupted data.</p>
+<p>RBDL does not depend on any language. However, RBDL files are intended to be later transpiled into another language that implements the mechanism required for parsing the file format in question.</p>
+<p>WARNING: This product targets languages known to the State of California to cause cancer
+and birth defects or other reproductive harm (pun intended).</p>
+<h3><a class="header" href="#credits" id="credits">Credits</a></h3>
+<p>RBDL specifications is heavily inspired by <a href="http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1124.pdf">C standards ISO/IEC 9899:2011</a>, <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2014/n4296.pdf">Standard for ProgrammingLanguage C++</a>, and
+<a href="https://doc.rust-lang.org/reference/introduction.html">The Rust Reference</a>.</p>
+<h1><a class="header" href="#motivation" id="motivation">Motivation</a></h1>
+<p>Parsing binary file formats is a very complex process, let
+alone handling cases where binary files may be tampered
+with to make the parsing process itself harder. RBDL aims
+to simplify the process of parsing complex binary file
+formats by delegating the process of writing parsers to
+transpiler that accepts declarative syntax, and generating
+an imperative parser for the given format.</p>
+<h1><a class="header" href="#scope" id="scope">Scope</a></h1>
+<p>This specification document covers:</p>
+<ul>
+<li>The syntax constraints or RBDL document.</li>
+<li>The semantic rules for transpiling RBDL documents.</li>
+<li>The API exposed by transpiled documents for all target languages.</li>
+</ul>
+<p>This specification document does not cover:</p>
+<ul>
+<li>The internal representation for binary data inside transpiled RBDL documents.</li>
+<li>RBDL transpiler implementation.</li>
+<li>The error messages reported by RBDL transpiler in case of <strong>ill-formed document</strong>.</li>
+</ul>
+<h1><a class="header" href="#terms-keywords-and-symbols" id="terms-keywords-and-symbols">Terms, keywords, and symbols</a></h1>
+<p>The key words <strong>MUST</strong>, <strong>MUST NOT</strong>, <strong>REQUIRED</strong>, <strong>SHALL</strong>,
+<strong>SHALL NOT</strong>, <strong>SHOULD</strong>, <strong>SHOULD NOT</strong>, <strong>RECOMMENDED</strong>,
+<strong>MAY</strong>, and <strong>OPTIONAL</strong> in this document are to be interpreted
+as described in <a href="https://tools.ietf.org/html/rfc2119">RFC 2119</a>.</p>
+<p>For the purpose of this document, the following terms, keywords,
+and symbols are styled in <em>italic</em>.</p>
+<h3><a class="header" href="#binary-digit" id="binary-digit">binary-digit</a></h3>
+<p>A character selected from the alphabet:</p>
+<pre><code>0 1
+</code></pre>
+<h3><a class="header" href="#code" id="code">code</a></h3>
+<p>the result of RBDL transpiling process.</p>
+<h3><a class="header" href="#compile-time" id="compile-time">compile time</a></h3>
+<p>the phase during which output of <em>rbdlc</em> is converted into machine language or equivalent.</p>
+<h3><a class="header" href="#decimal-digit" id="decimal-digit">decimal-digit</a></h3>
+<p>A character selected from the alphabet:</p>
+<pre><code>0 1 2 3 4 5 6 7 8 9
+</code></pre>
+<h3><a class="header" href="#hex-digit" id="hex-digit">hex-digit</a></h3>
+<p>A character selected from the alphabet:</p>
+<pre><code>A B C D E F a b c d e
+f 0 1 2 3 4 5 6 7 8 9
+</code></pre>
+<h3><a class="header" href="#ill-formed-code" id="ill-formed-code">ill-formed code</a></h3>
+<p>code that does not follow either the syntax constraints or the semantic rules of <em>target language</em></p>
+<h3><a class="header" href="#ill-formed-document" id="ill-formed-document">ill-formed document</a></h3>
+<p>a document that does not follow either the syntax constraints or the semantic rules of RBDL</p>
+<h3><a class="header" href="#octal-digit" id="octal-digit">octal-digit</a></h3>
+<p>A character selected from the alphabet:</p>
+<pre><code>0 1 2 3 4 5 6 7
+</code></pre>
+<h3><a class="header" href="#rbdlc" id="rbdlc">rbdlc</a></h3>
+<p>[Short hand for RBDL compiler] RBDL transpiler implementation that confirms RBDL specifications and supports all <strong>target languages</strong></p>
+<h3><a class="header" href="#run-time" id="run-time">run time</a></h3>
+<p>the phase during which a parser generated from RBDL document gets to parse binary files.</p>
+<h3><a class="header" href="#target-language" id="target-language">target language</a></h3>
+<p>a programming language which RBDL document can be converted into as per this specifications document</p>
+<h3><a class="header" href="#transpile-time" id="transpile-time">transpile time</a></h3>
+<p>the phase during which RBDL document is converted into code written in <em>target language</em></p>
+<h3><a class="header" href="#well-formed-code" id="well-formed-code">well-formed code</a></h3>
+<p><em>code</em> that follows both the syntax constraints and the semantic rules of <em>target language</em></p>
+<h3><a class="header" href="#well-formed-document" id="well-formed-document">well-formed document</a></h3>
+<p>a document that follows both the syntax constraints and the semantic rules of RBDL</p>
+<h1><a class="header" href="#environment" id="environment">Environment</a></h1>
+<p>The text that describes binary file format is called <em>RBDL document</em>.</p>
+<h2><a class="header" href="#document-structure" id="document-structure">Document Structure</a></h2>
+<p>The text of RBDL document <strong>MUST</strong> be kept in a single file prior to transpiling. The result of transpiling is <strong>REQUIRED</strong> to be <em>well-formed code</em>. Transpiled <em>code</em> <strong>MAY</strong> depend on arbitrary 3rd party run time library. However, it <strong>MUST</strong> be possible to convert the transpiled <em>code</em> (together with any needed 3rd party runtime) into a stand-alone library.</p>
+<h2><a class="header" href="#diagnostics" id="diagnostics">Diagnostics</a></h2>
+<p><em>rbdlc</em> <strong>MUST</strong> produce at least one error message it is processing <em>ill-formed document</em> or generating <em>ill-formed code</em>.</p>
+<h2><a class="header" href="#character-set" id="character-set">Character Set</a></h2>
+<p>RBDL documents <strong>MUST</strong> be written using UTF-8 as per <a href="http://unicode.org/L2/L2010/10038-fcd10646-main.pdf">ISO/IEC 10646</a>. However, generated parsers <strong>MUST</strong> be at least capable of parsing arbitrary character set as a binary sequence.</p>
+<h1><a class="header" href="#lexical-structure" id="lexical-structure">Lexical Structure</a></h1>
+<p>RBDL document is case sensitive.</p>
+<p>Example: <code>struct</code> is RBDL keyword while <code>Struct</code> is not.</p>
+<h2><a class="header" href="#keywords" id="keywords">Keywords</a></h2>
+<p>RBDL has two sets of keywords: The first set is functional keywords. These keywords <strong>MUST</strong> be only used in their specific context. The second set is non-functional keywords. Non-functional keywords <strong>MUST NOT</strong> be used anywhere in a <em>well-formed document</em>. The rationale is that non-functional keywords are reserve keyword in one or more
+<em>target language</em>.</p>
+<h3><a class="header" href="#functional-keywords" id="functional-keywords">Functional Keywords</a></h3>
+<pre><code>bool    char    enum    false   true    struct
+</code></pre>
+<h3><a class="header" href="#non-functional-keywords" id="non-functional-keywords">Non-functional Keywords</a></h3>
+<pre><code>_               _Alignas            _Alignof    _Atomic _Bool   _Complex
+_Generic        _Imaginary          _Noreturn   _Static         _Thread_local
+__ENCODING      __FILE__            __LINE__    __func__        _assert
+abstract        alias               alignas     alignof         and
+and_eq          as                  asm         assert          async
+auto            await               base        become          BEGIN
+begin           bitand              bitor       boolean         box
+break           byte                case        catch           char16_t
+char32_t        checked             class       compl           const
+const_cast      constexpr           continue    crate           decimal
+decltype        def                 default     defined         del
+delegate        delete              do          double          dyn
+dynamic_cast    elif                else        elsif           END
+end             ensure              enumerate   event           except
+explicit        export              extends     extern          False
+final           finally             fixed       float           fn
+for             foreach             friend      from            global
+goto            if                  impl        implements      implicit
+import          in                  inline      instanceof      int
+interface       internal            is          lambda          let
+lock            long                loop        macro           match
+mod             module              move        mut             mutable
+namespace       native              new         next            nil
+noexcept        None                nonlocal    not             not_eq
+null            nullptr             object      operator        or
+or_eq           out                 override    package         params
+pass            priv                private     protected       pub
+public          raise               readonly    redo            ref
+register        reinterpret_cast    rescue      restrict        retry
+return          sbyte               sealed      Self            self
+short           signed              sizeof      stackalloc      static
+static_assert   static_cast         strictfp    string          super
+switch          synchronized        template    then            this
+thread_local    throw               throws      trait           transient
+True            try                 type        typedef         typeid
+typename        typeof              uint        ulong           unchecked
+undef           union               unless      unsafe          unsigned
+unsized         until               use         ushort          using
+virtual         void                volatile    wchar_t         when
+where           while               with        xor             xor_eq
+yield
+</code></pre>
+<h2><a class="header" href="#identifiers" id="identifiers">Identifiers</a></h2>
+<p>An Identifier is an arbitrarily long sequence of characters. The first character <strong>MUST</strong> be chosen from the <code>Alpha Group</code>. The remaining characters in an identifier <strong>MUST</strong> be chosen from <code>Alpha Group</code> or <code>Num Group</code>. An Identifier <strong>MUST NOT</strong> be a <a href="006_LexicalStructure/./001_keywords.html">keyword</a></p>
+<pre><code>Alpha Group:
+            a b c d e f g h i j k l m
+            n o p q r s t u v w x y z
+            A B C D E F G H I J K L M
+            N O P Q R S T U V W X Y Z _
+Num Group:
+            0 1 2 3 4 5 6 7 8 9
+</code></pre>
+<h2><a class="header" href="#comments" id="comments">Comments</a></h2>
+<h3><a class="header" href="#single-line-comments" id="single-line-comments">Single-Line Comments</a></h3>
+<p>Except when being part of string literal, single-line comments start with
+<code>//</code> sequence and followed by any UTF-8 character and terminated by a new line.</p>
+<p>Example</p>
+<pre><code class="language-rust ignore">    // This is single line comment
+    Color : struct {
+        // This is another single line comment
+        r: u8,
+        g: u8,
+        b: u8,
+    }
+</code></pre>
+<h3><a class="header" href="#multiline-comments" id="multiline-comments">Multiline Comments</a></h3>
+<p>Except when being part of string literal, a multiline comment starts with
+<code>\*</code> sequence and terminated by <code>*/</code> sequence. Multiline comments <strong>MAY</strong>
+contain any valid UTF-8 characters except the terminating sequence <code>*/</code>.
+Multiline comments <strong>MUST NOT</strong> be nested.</p>
+<p>Example</p>
+<pre><code class="language-rust ignore">    /* This is
+       a multi line
+       comment
+    */
+    Color : struct {
+        r: u8,
+        g: u8,
+        /* another
+            multiline
+            comment
+        */
+        b: u8,
+    }
+</code></pre>
+<h2><a class="header" href="#literals" id="literals">Literals</a></h2>
+<p>RBDL supports several types of literals:</p>
+<ul>
+<li><a href="006_LexicalStructure/004_literals.html#bolean-literals"><em>boolean</em></a></li>
+<li><a href="006_LexicalStructure/004_literals.html#byte-character-literal"><em>byte-character</em></a></li>
+<li><a href="006_LexicalStructure/004_literals.html#byte-string-literals"><em>byte-string</em></a></li>
+<li><a href="006_LexicalStructure/004_literals.html#character-literals"><em>character</em></a></li>
+<li><a href="006_LexicalStructure/004_literals.html#floating-point-literals"><em>floating-point</em></a></li>
+<li><a href="006_LexicalStructure/004_literals.html#integer-literals"><em>integer</em></a></li>
+<li><a href="006_LexicalStructure/004_literals.html#string-literals"><em>string</em></a></li>
+<li><a href="006_LexicalStructure/004_literals.html#vector-literals"><em>vector</em></a></li>
+</ul>
+<h3><a class="header" href="#boolean-literals" id="boolean-literals">Boolean Literals</a></h3>
+<p>Boolean literals <strong>MUST</strong> be either the keyword <code>true</code> or the keyword <code>false</code>.</p>
+<h3><a class="header" href="#byte-character-literals" id="byte-character-literals">Byte-Character Literals</a></h3>
+<p>A <em>byte-character</em> literal <strong>MUST</strong> be a single ASCII character enclosed
+in single quotes preceded by character <code>b</code> as in <code>b'x'</code>. <em>Byte-Character</em>
+literals <strong>MUST</strong> follow <a href="006_LexicalStructure/004_literals.html#byte-escaping">byte escaping</a> rules and
+<a href="006_LexicalStructure/004_literals.html#quote-escaping">quote escaping</a> rules when needed.</p>
+<p><em>Byte-character</em> literals are to be interpreted as <code>u8</code> atomic type.</p>
+<h3><a class="header" href="#byte-string-literals" id="byte-string-literals">Byte-String Literals</a></h3>
+<p>A <em>byte-string</em> literal <strong>MUST</strong> be one or more ASCII characters enclosed in
+double-quotes preceded by character as in <code>&quot;xyz&quot;</code>. <em>Byte-String</em> literals
+<strong>MUST</strong> follow <a href="006_LexicalStructure/004_literals.html#byte-escaping">byte escaping</a> rules and
+<a href="006_LexicalStructure/004_literals.html#quote-escaping">quote escaping</a> rules when needed.</p>
+<p><em>Byte-string</em> literals are to be interpreted as <code>Vec&lt;u8&gt;</code> type where each
+element in the <em>vector</em> represents single <em>byte-character</em>.</p>
+<h3><a class="header" href="#character-literals" id="character-literals">Character Literals</a></h3>
+<p>A <em>character</em> literal <strong>MUST</strong> be a single UTF-8 character enclosed
+in single quotes as in <code>'x'</code>. <em>Character</em> literals <strong>MUST</strong> follow
+<a href="006_LexicalStructure/004_literals.html#ascii-escaping">ASCII escaping</a> rules, <a href="006_LexicalStructure/004_literals.html#unicode-escaping">Unicode escaping</a>
+rules and <a href="006_LexicalStructure/004_literals.html#quote-escaping">quote escaping</a> rules when needed.</p>
+<h3><a class="header" href="#floating-point-literals" id="floating-point-literals">Floating-Point Literals</a></h3>
+<p>A <em>floating-point</em> literal has one of two forms:</p>
+<ul>
+<li>
+<p>One or more <em>decimal-digits</em> followed by a period character <code>.</code>
+optionally followed by one or more <em>decimal-digits</em> optionally
+followed by an exponent.</p>
+</li>
+<li>
+<p>One or more <em>decimal-digits</em> followed by an exponent.</p>
+</li>
+</ul>
+<p>Where exponent is either the character <code>e</code> or <code>E</code> followed by
+one or more <em>decimal-digits</em>.</p>
+<p>Character <code>_</code> <strong>MAY</strong> be used as a visual separator between digits, and they
+<strong>MUST</strong> be ignored by <em>rbdlc</em>.</p>
+<p>Example:
+<code>1_234.567_8</code> is the same as <code>1234.5678</code>.</p>
+<h3><a class="header" href="#integer-literals" id="integer-literals">Integer Literals</a></h3>
+<p>An integer literal has one of several forms:</p>
+<ul>
+<li><code>0</code></li>
+<li><code>0b0</code></li>
+<li><code>0o0</code></li>
+<li><code>0x0</code></li>
+<li>A non zero <em>decimal-digit</em> followed by an arbitrary sequence of <em>decimal-digits</em>.</li>
+<li><code>0x</code> followed by a non zero <em>hex-digit</em> followed by an arbitrary sequence of <em>decimal-digits</em>.</li>
+<li><code>0o</code> followed by non zero <em>octal-digit</em> followed by an arbitrary sequence of <em>octal-digits</em>.</li>
+<li><code>0b</code> followed by non zero <em>binary-digit</em> followed by an arbitrary sequence of <em>binary-digits</em>.</li>
+</ul>
+<p>Character <code>_</code> <strong>MAY</strong> be used as a visual separator between digits, and they
+<strong>MUST</strong> be ignored by <em>rbdlc</em>.</p>
+<h3><a class="header" href="#string-literals" id="string-literals">String Literals</a></h3>
+<p>A <em>string</em> literal <strong>MUST</strong> be one ore more UTF-8 character enclosed
+in double quotes as in <code>&quot;xyx&quot;</code>. <em>String</em> literals <strong>MUST</strong> follow
+<a href="006_LexicalStructure/004_literals.html#ascii-escaping">ASCII escaping</a> rules, <a href="006_LexicalStructure/004_literals.html#unicode-escaping">Unicode escaping</a>
+rules and <a href="006_LexicalStructure/004_literals.html#quote-escaping">quote escaping</a> rules when needed.</p>
+<h3><a class="header" href="#vector-literals" id="vector-literals">Vector Literals</a></h3>
+<p>A <em>vector</em> literal <strong>MUST</strong> be one or more literals of the same kind separated
+by a comma <code>,</code> and enclosed in square brackets as in <code>[1, 2, 3, 4]</code>. The last
+element in a vector literal <strong>MAY</strong> be separated from the closing square bracket
+<code>]</code> by a comma <code>,</code> as in <code>[1, 2, 3,]</code>. Two <em>vector</em> literals are said to have the
+same type if and only if all the elements inside both vectors have the same literal
+type.</p>
+<h3><a class="header" href="#ascii-escaping" id="ascii-escaping">ASCII Escaping</a></h3>
+<table><thead><tr><th>ASCII Escape sequence</th><th>Name</th></tr></thead><tbody>
+<tr><td><code>\n</code></td><td>New line</td></tr>
+<tr><td><code>\r</code></td><td>Carriage return</td></tr>
+<tr><td><code>\t</code></td><td>Tab</td></tr>
+<tr><td><code>\\</code></td><td>Single backslash</td></tr>
+<tr><td><code>\0</code></td><td>Null byte</td></tr>
+<tr><td><code>\x</code> followed by 2 <em>hex-digits</em></td><td>Hex byte &lt;= 0x7F</td></tr>
+</tbody></table>
+<h3><a class="header" href="#byte-escaping" id="byte-escaping">Byte Escaping</a></h3>
+<table><thead><tr><th>Byte Escape Sequence</th><th>Name</th></tr></thead><tbody>
+<tr><td><code>\n</code></td><td>New line</td></tr>
+<tr><td><code>\r</code></td><td>Carriage return</td></tr>
+<tr><td><code>\t</code></td><td>Tab</td></tr>
+<tr><td><code>\\</code></td><td>Single backslash</td></tr>
+<tr><td><code>\0</code></td><td>Null byte</td></tr>
+<tr><td><code>\x</code> followed by 2 <em>hex-digits</em></td><td>Arbitrary hex byte</td></tr>
+</tbody></table>
+<h3><a class="header" href="#quote-escaping" id="quote-escaping">Quote Escaping</a></h3>
+<table><thead><tr><th>Quote Escape sequence</th><th>Name</th></tr></thead><tbody>
+<tr><td><code>\'</code></td><td>Single Quote</td></tr>
+<tr><td><code>\&quot;</code></td><td>Double Quote</td></tr>
+</tbody></table>
+<h3><a class="header" href="#unicode-escaping" id="unicode-escaping">Unicode Escaping</a></h3>
+<table><thead><tr><th>Unicode Escape sequence</th><th>Name</th></tr></thead><tbody>
+<tr><td><code>\u</code> followed by 6 <em>hex-digits</em></td><td>Unicode character code</td></tr>
+</tbody></table>
+<h1><a class="header" href="#basic-concepts" id="basic-concepts">Basic concepts</a></h1>
+<h2><a class="header" href="#conceptual-model" id="conceptual-model">Conceptual Model</a></h2>
+<p>A type is informally defined as a set of values associated with a way to
+semantically interpret these values. RBDL document's role is to provide
+all the needed tools to create the semantic interpretation for any
+arbitrary value that is valid based on some specifications.</p>
+<p>Syntactically, types are just identifiers. In <em>well-formed documents</em>, a type <em>MUST</em> not be defined twice Some build-in types are reserved keywords
+and <strong>MUST</strong> not be used in any other context.</p>
+<p><em>rbdlc</em> provides a set of primitive types, these types act as the building
+blocks for compound types. RBDL document is composed of one or more
+compound types definitions, some of which <strong>MAY</strong> depend on other
+compound types.</p>
+<h2><a class="header" href="#template-meta-types" id="template-meta-types">Template Meta-Types</a></h2>
+<p>For the purpose of this document, a template meta-type is informally defined
+as an incomplete type. In <em>well-formed documents</em>, a template meta-type
+<strong>REQUIRES</strong> one or more types arguments to complete the type
+definition.</p>
+<p>Syntactically, Template meta types are an identifier followed by open angle bracket symbol <code>&lt;</code> followed by comma-separated list types followed by close angle bracket symbol <code>&gt;</code>.</p>
+<h3><a class="header" href="#example" id="example">Example:</a></h3>
+<p>The type <code>Vec</code> is a template meta-type and <code>Vec&lt;u8&gt;</code> is completed meta-type
+representing an array of unsigned 8-bits integers.</p>
+<p>If a type is used as an argument for a template meta-type, any required attributes for that argument type <strong>MUST</strong> be provided at the template meta-type usage.</p>
+<h1><a class="header" href="#primitive-types" id="primitive-types">Primitive Types</a></h1>
+<p>RBDL has various primitive types, all of which <strong>MUST</strong> be supported by
+<em>rbdlc</em>. These types represent fundamental building blocks that can be
+later used to construct compound types in rbdl document.</p>
+<h2><a class="header" href="#types-representing-integers" id="types-representing-integers">Types representing Integers</a></h2>
+<p>All types in this category support the following attributes:</p>
+<ul>
+<li><code>alignment</code></li>
+<li><code>discard</code></li>
+<li><code>padding</code></li>
+<li><code>static</code></li>
+<li><code>unreliable</code></li>
+</ul>
+<p>And all of them except for <a href="008_primitive_types.html#i8"><code>i8</code></a> and <a href="008_primitive_types.html#u8"><code>u8</code></a> support
+<code>endianness</code> attribute.</p>
+<h3><a class="header" href="#i8" id="i8"><code>i8</code></a></h3>
+<p>Signed 8-bits integer \(i\) where \( -128 \le i \lt 128 \).</p>
+<h3><a class="header" href="#i16" id="i16"><code>i16</code></a></h3>
+<p>Signed 16-bits integer \(i\) where \( -32768 \le i \lt 32768 \).</p>
+<h3><a class="header" href="#i32" id="i32"><code>i32</code></a></h3>
+<p>Signed 32-bits integer \(i\) where \( -2147483648 \le i \lt 2147483648 \).</p>
+<h3><a class="header" href="#i64" id="i64"><code>i64</code></a></h3>
+<p>Signed 64-bits integer \(i\) where
+\( -9223372036854775808 \le i \lt 9223372036854775808 \).</p>
+<h3><a class="header" href="#i128" id="i128"><code>i128</code></a></h3>
+<p>Signed 128-bits integer \(i\) where \( -170141183460469231731687303715884105728
+\le i \lt 170141183460469231731687303715884105728 \).</p>
+<h3><a class="header" href="#u8" id="u8"><code>u8</code></a></h3>
+<p>Unsigned 8-bits integer \(i\) where \( 0 \le i \lt 256 \).</p>
+<h3><a class="header" href="#u16" id="u16"><code>u16</code></a></h3>
+<p>Unsigned 16-bits integer \(i\) where \( 0 \le i \lt 65536 \).</p>
+<h3><a class="header" href="#u32" id="u32"><code>u32</code></a></h3>
+<p>Unsigned 32-bits integer \(i\) where \( 0 \le i \lt 4294967296 \).</p>
+<h3><a class="header" href="#u64" id="u64"><code>u64</code></a></h3>
+<p>Unsigned 64-bits integer \(i\) where \( 0 \le i \lt 18446744073709551616 \).</p>
+<h3><a class="header" href="#u128" id="u128"><code>u128</code></a></h3>
+<p>unSigned 128-bits integer \(i\) where \( 0 \le i \lt
+340282366920938463463374607431768211456 \).</p>
+<h2><a class="header" href="#types-representing-floating-point-numbers" id="types-representing-floating-point-numbers">Types representing floating-point numbers.</a></h2>
+<p>Floating-point representation is based on IEEE 754. All types in this category support the following attributes:</p>
+<ul>
+<li><code>alignment</code></li>
+<li><code>discard</code></li>
+<li><code>padding</code></li>
+<li><code>static</code></li>
+<li><code>unreliable</code></li>
+</ul>
+<h3><a class="header" href="#f32" id="f32"><code>f32</code></a></h3>
+<p>Single-precision float.</p>
+<h3><a class="header" href="#f64" id="f64"><code>f64</code></a></h3>
+<p>Double-precision float.</p>
+<h2><a class="header" href="#miscellaneous-types" id="miscellaneous-types">Miscellaneous Types</a></h2>
+<h3><a class="header" href="#char" id="char"><code>char</code></a></h3>
+<p>Characters selected from alphabet encoded via attribute
+<code>encoding</code>. Each <code>char</code> type <strong>MUST</strong> have <code>encoding</code> attribute.</p>
+<p><code>char</code> supports the following attributes:</p>
+<ul>
+<li><code>alignment</code></li>
+<li><code>discard</code></li>
+<li><code>encoding</code></li>
+<li><code>padding</code></li>
+<li><code>static</code></li>
+</ul>
+<h2><a class="header" href="#array-based-types" id="array-based-types">Array-Based types</a></h2>
+<p>All types in this category support the following attributes:</p>
+<ul>
+<li><code>alignment</code></li>
+<li><code>discard</code></li>
+<li><code>padding</code></li>
+<li><code>static</code></li>
+<li><code>unreliable</code></li>
+<li><code>count</code></li>
+</ul>
+<p><code>Vec</code> and <code>String</code> types additionally have the following attribute:</p>
+<ul>
+<li><code>delimiter</code></li>
+</ul>
+<h3><a class="header" href="#bin" id="bin"><code>bin</code></a></h3>
+<p>one or more unsigned <em>binary-digit</em> encoded via attribute
+<code>encoding</code>. Each <code>bin</code> type <strong>MUST</strong> have <code>encoding</code> and <code>count</code>
+attribute. The value of <code>count</code> attribute <strong>MUST</strong> be between 0
+and 128.</p>
+<h3><a class="header" href="#dec" id="dec"><code>dec</code></a></h3>
+<p>one or more unsigned <em>decimal-digit</em> encoded via attribute
+<code>encoding</code>. Each <code>dec</code> type <strong>MUST</strong> have <code>encoding</code> and <code>count</code>
+attribute. The value of <code>count</code> attribute <strong>MUST</strong> be between 0
+and 39.</p>
+<h3><a class="header" href="#hex" id="hex"><code>hex</code></a></h3>
+<p>one or more unsigned <em>hex-digit</em> encoded via attribute
+<code>encoding</code>. Each <code>hex</code> type <strong>MUST</strong> have <code>encoding</code> and <code>count</code>
+attribute. The value of <code>count</code> attribute <strong>MUST</strong> be between 0
+and 32.</p>
+<h3><a class="header" href="#oct" id="oct"><code>oct</code></a></h3>
+<p>one or more unsigned <em>octal-digit</em> encoded via attribute
+<code>encoding</code>. Each <code>oct</code> type <strong>MUST</strong> have <code>encoding</code> and <code>count</code>
+attribute. The value of <code>count</code> attribute <strong>MUST</strong> be between 0
+and 42.</p>
+<h3><a class="header" href="#string" id="string"><code>String</code></a></h3>
+<p>Zero or more <a href="008_primitive_types.html#char"><code>char</code></a> encoded via attribute <code>encoding</code>.
+Each <code>String</code> <strong>MUST</strong> have <code>encoding</code> attribute. Also, each <code>String</code>
+<strong>MUST</strong> have at least either <code>delimiter</code> attribute or <code>count</code> attribute. A
+<code>String</code> type may have both <code>delimiter</code> and <code>count</code>, in that case, a
+<code>String</code>  is terminated whenever <code>delimiter</code> is met or <code>count</code> is reached
+whichever comes first.</p>
+<h3><a class="header" href="#vect" id="vect"><code>vec&lt;T&gt;</code></a></h3>
+<p>An array holding zero or more elements of type <code>T</code>. Each <code>vec&lt;T&gt;</code> <strong>MUST</strong>
+have at least either <code>delimiter</code> attribute or <code>count</code> attribute. A <code>Vec&lt;T&gt;</code>
+type may have both <code>delimiter</code> and <code>count</code>, in that case, a <code>Vec&lt;T&gt;</code> is terminated whenever <code>delimiter</code> is met or <code>count</code> is reached whichever
+comes first.</p>
+<h1><a class="header" href="#compound-types" id="compound-types">Compound Types</a></h1>
+<p>Compound types are the main building blocks of RBDL document. Compound types <strong>MUST</strong> fall in one of two categories: either <code>enum</code> type or <code>struct</code> type. Both categories of compound types have the following structure</p>
+<pre><code class="language-rust ignore">#[attr_1, /* More attributes as needed */ attr_n]
+CompoundTypeName: Category {
+    // Atrributes are optional unless required by `Type_1`
+    #[field1_attr_1, field1_attr_n]
+    fiald1: Type_1,
+    field2: MetaType_2&lt;Type_n&gt;
+    // more fields as needed
+    field_n: Type_m
+}
+</code></pre>
+<p>A <em>well-formed document</em> may have Compound types without attributes (the line <code>#[attr_1, /* More attributes as needed */ attr_n]</code> is completely optional).</p>
+<p>Category <strong>MUST</strong> be either the keyword <code>enum</code> or <code>struct</code>. Compound type name <strong>MUST</strong> be a unique identifier amongst all other compound types and primitive types.</p>
+<p>Compound types <strong>MAY</strong> be template meta types, template meta types have syntax as follows:</p>
+<pre><code class="language-rust ignore">#[attr_1, attr_n] // More attributes as needed
+CompoundTypeName: Category&lt;MT1, MT2&gt; // more meta types are required
+{
+    // Atrributes are optional unless required by `Type_1`
+    #[field1_attr_1, field1_attr_n]
+    fiald1: Type_1,
+    field2: MT1
+    #[attr_i]
+    field3: MT2
+    // more fields as needed
+    field_n: Type_m
+}
+</code></pre>
+<p><code>MT1</code> <strong>MAY</strong> be substituted by any type. <code>MT2</code> <strong>MUST</strong> be subsituted by only types that the
+arbitrarily specified attribute <code>attr_i</code>.</p>
+<h2><a class="header" href="#struct" id="struct"><code>struct</code></a></h2>
+<p><code>struct</code> compound types are used to concatenate one or more types into one bigger type.</p>
+<p>Example:</p>
+<pre><code class="language-rust ignore">RGB: struct {
+    #[encoding=&quot;ASCII&quot;, static='#', discard]
+    hash: char,
+    #[encoding=&quot;ASCII&quot;, count=2]
+    r: hex,
+    #[encoding=&quot;ASCII&quot;, count=2]
+    g: hex,
+    #[encoding=&quot;ASCII&quot;, count=2]
+    b: hex,
+}
+</code></pre>
+<p>The <code>struct</code> defined above is capable of successfully parsing
+<code>#a1b2c3</code> where:</p>
+<ul>
+<li><code>hash</code> will be set to <code>#</code> but will be later discarded.</li>
+<li><code>r</code> will be set to <code>0xa1</code>.</li>
+<li><code>g</code> will be set to <code>0xb2</code>.</li>
+<li><code>b</code> will be set to <code>c3</code>.</li>
+</ul>
+<h2><a class="header" href="#enum" id="enum"><code>enum</code></a></h2>
+<p><code>enum</code> compound types are used to combine types in a way that
+allows selectively using only one of them. All fields pairs
+in any given <code>enum</code> <strong>MUST</strong> be separable either internally
+or externally. For an <code>enum</code> to be part of <em>well-formed
+document</em>, if one pair of fields is externally separated,
+then all fields pairs in that <code>enum</code> <strong>MUST</strong> be externally
+separated, and if one pair of fields is internally separated,
+then all fields pairs in that <code>enum</code> <strong>MUST</strong> be internally
+separated.</p>
+<h3><a class="header" href="#enums-with-internally-separable-fields" id="enums-with-internally-separable-fields"><code>enums</code> with internally separable fields.</a></h3>
+<p>Two fields of the same enum are said to be internally separable
+IFF there exists <code>n</code> where the data stored at given nth
+offset from the start of both members are both static and
+different.</p>
+<p>Example 1:</p>
+<pre><code class="language-rust ignore">X: enum {
+    #[static=5]
+    V1: u8,
+    #[static=7]
+    V2: U8,
+}
+</code></pre>
+<p>the byte <code>0x05</code> will be parsed as <code>X::V</code> while the byte <code>0x07</code> will be parsed as <code>X::V2</code></p>
+<p>Example 2:</p>
+<pre><code class="language-rust ignore">V1: struct {
+    #[static=&quot;SIG&quot;, encoding=&quot;ASCII&quot;, count=3]
+    magic: String,
+    data1: u16,
+    #[static=&quot;1&quot;, encoding=&quot;ASCII&quot;]
+    Version: char,
+    u: u8,
+}
+V2 :struct {
+    #[static=&quot;SIG&quot;, encoding=&quot;ASCII&quot;, count=3]
+    magic: String,
+    d1: u8,
+    #[encoding=&quot;ASCII&quot;]
+    d2: char,
+    #[static=&quot;2&quot;, encoding=&quot;ASCII&quot;]
+    version: char,
+    #[encoding=&quot;ASCII&quot;]
+    c: char,
+}
+
+File: enum {
+    v1: V1
+    v2: V2
+}
+</code></pre>
+<p>Attempting to parse hex byte sequence <code>53494741423243</code> as
+<code>File</code> will result in <code>File::V2</code> with fields as follows:</p>
+<ul>
+<li><code>magic</code> = <code>&quot;SIG&quot;</code></li>
+<li><code>d1</code> = <code>0x41</code></li>
+<li><code>d2</code> = <code>'B'</code></li>
+<li><code>version</code> = <code>'2'</code></li>
+<li><code>c</code> = <code>'C'</code></li>
+</ul>
+<p>On the other hand, attempting to parse  the hex byte
+sequence <code>53494741423142</code> as <code>File</code> will result in <code>File::V1</code>
+with fields as follows:</p>
+<ul>
+<li><code>magic</code> = <code>&quot;SIG&quot;</code></li>
+<li><code>data</code> = <code>0x4241</code></li>
+<li><code>version</code> = <code>'1'</code></li>
+<li><code>u</code> = <code>0x43</code></li>
+</ul>
+<h3><a class="header" href="#enums-with-externally-separable-fields" id="enums-with-externally-separable-fields"><code>enums</code> with externally separable fields.</a></h3>
+<p><code>enum</code> compound types with externally separable fields <strong>MUST</strong> use
+<code>shadow</code>, <code>selector</code> and <code>selector_args</code> attributes to define how
+member fields are to be separated.</p>
+<p><code>shadow</code> attribute is used on externally separable <code>enum</code> to create minimal externally separable <code>enum</code> (or the nearest equivalent in the <em>target language</em>) that resembles the structure of the <code>enum</code> to be shadowed.</p>
+<p><code>selector</code> attribute represents the name of a function written in <em>target language</em> that takes arguments specified by <code>selector_args</code> and return a variable of a type specified by <code>shadow</code>. Unlike <code>shadow</code>, both <code>selector</code> and <code>selector_args</code> are not used when an <code>enum</code> with externally separable fields is defined, but instead, they are used when then <code>enum</code> is used.</p>
+<p><code>selector_args</code> takes a list of fields all of which must be drawn from the parent of our <code>enum</code> with externally separable fields.</p>
+<p>Example:</p>
+<p>File: <em>grammar.rbdl</em></p>
+<pre><code class="language-rust ignore">Version: enum {
+ #[static=0]
+ V0: u8
+ #[static=1]
+ V1: u8
+}
+#[shadow=DataShadow]
+Data : enum {
+ D8: u8,
+ D16: u16,
+}
+
+FullFile: struct {
+ version_a: Version,
+ version_b: Version,
+ #[selector=version_sel, selector_args=[version_a]]
+ data_a: Data,
+ #[selector=version_sel, selector_args=[version_b]]
+ data_b: Data,
+}
+</code></pre>
+<p>File: <em>grammar.rs</em></p>
+<pre><code class="language-rust ignore">rbdl_include!(&quot;grammar.rdbl&quot;)
+
+fn version_sel(version: &amp;Version) -&gt; DataShadow {
+ match version {
+ Version::V0 =&gt; DataShadow::D8,
+ Version::V1 =&gt; DataShadow::D16
+ }
+}
+</code></pre>
+<p>The snippet above defines file type with 4 completely different versions namely <code>0.0</code>, <code>0.1</code>, <code>1.0</code>, <code>1.1</code>. Where in the <code>X.Y</code> format, <code>data_a</code> of the <code>FullFile</code> struct depends on the <code>X</code> part while <code>data_b</code> depends on the <code>Y</code> part.</p>
+<p>In file <em>grammar.rbdl</em>, we first define an enum with internally separable variables to represent both the <code>X</code> and the <code>Y</code> part of the version. The <code>Data</code> enum represents the data that is either depending on <code>X</code> or <code>Y</code>. <code>shadow=DataShadow</code> creates another <code>enum</code> called <code>DataShadow</code> that mimics the same structure and members name of <code>Data</code>.</p>
+<p>In rust, <code>DataShadow</code> will look like this:</p>
+<pre><pre class="playpen"><code class="language-rust">
+<span class="boring">#![allow(unused_variables)]
+</span><span class="boring">fn main() {
+</span>enum DataShadow {
+    D8,
+    D16
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>The <code>selector</code> attribute applied to both <code>data_a</code> and <code>data_b</code> sets the function that will externally determine which version of <code>Data</code> they are to be called <code>version_sel</code>. The function identified by <code>selector</code> (which is <code>version_sel</code>) always returns datatype specified by <code>shadow</code> (which is <code>DataShadow</code>). The arguments sent to the <code>version_sel</code> function are set via the attribute <code>selector_args</code> which happens to be <code>version_a</code> in case of <code>data_a</code> and <code>version_b</code> in case of <code>data_b</code>.</p>
+<h1><a class="header" href="#attributes" id="attributes">Attributes</a></h1>
+<h2><a class="header" href="#list-of-rbdl-attributes-sorted-alphabetically" id="list-of-rbdl-attributes-sorted-alphabetically">List of rbdl attributes sorted alphabetically</a></h2>
+<h3><a class="header" href="#alignment" id="alignment">alignment</a></h3>
+<p>Align the start address of member in struct.</p>
+<h3><a class="header" href="#count" id="count">count</a></h3>
+<p>Sets the number of elements.</p>
+<h3><a class="header" href="#delimiter" id="delimiter">delimiter</a></h3>
+<p>Sets the ending delimiter.</p>
+<h3><a class="header" href="#discard" id="discard">discard</a></h3>
+<p>Do not include getter function for members marked with this attribute.</p>
+<h3><a class="header" href="#encoding" id="encoding">encoding</a></h3>
+<p>Allows setting encoding for <code>String</code> type. Available Encodings:</p>
+<ul>
+<li>ascii</li>
+<li>utf8</li>
+<li>utf16</li>
+</ul>
+<h3><a class="header" href="#endianness" id="endianness">endianness</a></h3>
+<p>Used to set endianness for numeric values that acquire more than one byte.
+Possible values:</p>
+<ul>
+<li><code>le</code>: little endian (Default value).</li>
+<li><code>be</code>: big endian.</li>
+</ul>
+<h3><a class="header" href="#padding" id="padding">padding</a></h3>
+<p>Align the end address.</p>
+<h3><a class="header" href="#selector" id="selector">selector</a></h3>
+<p>Used to set the name of the selector function in enums with externally separable
+memebrs.</p>
+<h3><a class="header" href="#selector_args" id="selector_args">selector_args</a></h3>
+<p>Used to set the arguments passed to enums with externally separable memebers.</p>
+<h3><a class="header" href="#shadow" id="shadow">shadow</a></h3>
+<p>Used to specify the name of shadow enum in enums with externally sperable members.</p>
+<h3><a class="header" href="#static" id="static">static</a></h3>
+<p>Used on members with already known values.</p>
+<h3><a class="header" href="#unreliable" id="unreliable">unreliable</a></h3>
+<p>Used on members that may fail to parse correctly. In which case these members
+will be ignored and parsing will continue past them. Any type referencing an
+unreliable member must be unreliable as well.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playpen_line_numbers = true;
+        </script>
+        
+        
+        
+        <script type="text/javascript">
+            window.playpen_copyable = true;
+        </script>
+        
+
+        
+        <script src="ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+        
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            MathJax.Hub.Register.StartupHook('End', function() {
+                window.setTimeout(window.print, 100);
+            });
+        });
+        </script>
+        
+        
+
+    </body>
+</html>
